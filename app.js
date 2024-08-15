@@ -27,6 +27,7 @@ app.post('/save', (req, res) => {
 
 // Endpoint to get the current data
 app.get('/data', (req, res) => {
+    console.log('GET /data request received');
     fs.readFile(DATA_FILE, 'utf8', (err, data) => {
         if (err) {
             console.error('Error reading data:', err);
