@@ -25,30 +25,34 @@
             event.preventDefault();
             const formData = new FormData(this);
             fetch('/save', {
-                method: 'POST',
-                body: JSON.stringify({
-                    link: formData.get('link'),
-                    arabicPrivacy: formData.get('arabicPrivacy'),
-                    englishPrivacy: formData.get('englishPrivacy')
-                }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            }).then(response => {
-                // Check if response is OK and if it's JSON
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.json();  // Attempt to parse JSON
-            }).then(data => {
-                console.log(data);
-                alert('Data saved successfully!');
-            }).catch(error => {
-                console.error('Error:', error);
-                alert('Failed to save data.');
-            });
+    method: 'POST',
+    body: JSON.stringify({
+        link: formData.get('link'),
+        arabicPrivacy: formData.get('arabicPrivacy'),
+        englishPrivacy: formData.get('englishPrivacy')
+    }),
+    headers: {
+        'Content-Type': 'application/json'
+    }
+}).then(response => {
+    return response.text().then(text => {
+        console.log('Response text:', text);
+        try {
+            const data = JSON.parse(text);
+            console.log(data);
+            alert('Data saved successfully!');
+        } catch (e) {
+            console.error('Error parsing JSON:', e);
+            alert('Failed to save data.');
+        }
+    });
+}).catch(error => {
+    console.error('Error:', error);
+    alert('Failed to save data.');
+});
+
         });
     </script>
-        
+
 </body>
 </html>
