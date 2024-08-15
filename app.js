@@ -4,11 +4,17 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = 3000;
-const DATA_FILE = path.join('data.json');
+const PORT = process.env.PORT || 3000; // Use environment variable for port
+const DATA_FILE = path.join(__dirname, 'data.json');
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Middleware to log request method and URL
+app.use((req, res, next) => {
+    console.log(`${req.method} ${req.url}`);
+    next();
+});
 
 // Endpoint to save or update data
 app.post('/save', (req, res) => {
