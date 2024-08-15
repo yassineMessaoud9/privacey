@@ -5,7 +5,7 @@ const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = 3000;
-const DATA_FILE = path.join(__dirname, 'data', 'data.json');
+const DATA_FILE = path.join('data.json');
 
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
