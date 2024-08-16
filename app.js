@@ -4,7 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 const app = express();
-const PORT = process.env.PORT || 3000; // Use environment variable for port
+const PORT = process.env.PORTs || 3000; // Use environment variable for port
 const DATA_FILE = path.join(__dirname, 'data.json');
 
 app.use(bodyParser.json());
